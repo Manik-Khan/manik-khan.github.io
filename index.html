@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Ear-Training Website</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="knobs">
+    <div id="knob1">
+      <canvas id="canvas1"></canvas>
+      <button id="play1">Play</button>
+      <input type="range" id="range1" min="0" max="100" value="50">
+      <br>
+      <select id="waveform1">
+        <option value="sine">Sine</option>
+        <option value="sawtooth">Sawtooth</option>
+        <option value="square">Square</option>
+        <option value="triangle">Triangle</option>
+      </select>
+      <br>
+      <span id="freqDisplay1"></span>
+    </div>
+    <div id="knob2">
+      <canvas id="canvas2"></canvas>
+      <button id="play2">Play</button>
+      <input type="range" id="range2" min="0" max="100" value="50">
+      <br>
+      <select id="waveform2">
+        <option value="sine">Sine</option>
+        <option value="sawtooth">Sawtooth</option>
+        <option value="square">Square</option>
+        <option value="triangle">Triangle</option>
+      </select>
+      <br>
+      <span id="freqDisplay2"></span>
+    </div>
+  </div>
+  <div id="info">
+    <h1>Welcome to the Ear-Training Website</h1>
+    <p>Improve your ability to recognize musical intervals and chords with our interactive ear-training exercises.</p>
+  </div>
+  <button id="toggle-button">Toggle Frequency Display</button>
+  <div id="difficulty">
+    <button id="easy">Easy</button>
+    <button id="medium">Medium</button>
+    <button id="hard">Hard</button>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
