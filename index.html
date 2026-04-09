@@ -1,51 +1,131 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Ear-Training Website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shruti — Tanpura Tuning Trainer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="knobs">
-    <div id="knob1">
-      <canvas id="canvas1"></canvas>
-      <button id="play1">Play</button>
-      <input type="range" id="range1" min="0" max="100" value="50">
-      <br>
-      <select id="waveform1">
-        <option value="sine">Sine</option>
-        <option value="sawtooth">Sawtooth</option>
-        <option value="square">Square</option>
-        <option value="triangle">Triangle</option>
-      </select>
-      <br>
-      <span id="freqDisplay1"></span>
+
+  <div class="grain"></div>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-sa">स</span>
+        <div class="logo-text">
+          <h1>Shruti</h1>
+          <p>Tanpura Tuning Trainer</p>
+        </div>
+      </div>
+      <div class="diff-bar">
+        <button class="diff-btn active" data-diff="beginner" onclick="setDiff('beginner')">Beginner</button>
+        <button class="diff-btn" data-diff="intermediate" onclick="setDiff('intermediate')">Intermediate</button>
+        <button class="diff-btn" data-diff="advanced" onclick="setDiff('advanced')">Advanced</button>
+      </div>
     </div>
-    <div id="knob2">
-      <canvas id="canvas2"></canvas>
-      <button id="play2">Play</button>
-      <input type="range" id="range2" min="0" max="100" value="50">
-      <br>
-      <select id="waveform2">
-        <option value="sine">Sine</option>
-        <option value="sawtooth">Sawtooth</option>
-        <option value="square">Square</option>
-        <option value="triangle">Triangle</option>
-      </select>
-      <br>
-      <span id="freqDisplay2"></span>
+  </header>
+
+  <main>
+
+    <section class="panel setup-panel">
+      <div class="panel-label">Configuration</div>
+      <div class="setup-grid">
+        <div class="setup-field">
+          <label>Tuning</label>
+          <select id="tuningSelect" onchange="onSetupChange()">
+            <option value="Pa">Pa – Sa – Sa – Sa (low)</option>
+            <option value="Ma">Ma# – Sa – Sa – Sa (low)</option>
+            <option value="Ni">Ni – Sa – Sa – Sa (low)</option>
+          </select>
+        </div>
+        <div class="setup-field">
+          <label>Base Sa</label>
+          <div class="slider-row">
+            <input type="range" id="saCoarse" min="196" max="493" value="261" step="1" oninput="onSetupChange()">
+            <span class="slider-val" id="saDisplay">C4 · 261 Hz</span>
+          </div>
+        </div>
+        <div class="setup-field">
+          <label>Fine tune</label>
+          <div class="slider-row">
+            <input type="range" id="saFine" min="-50" max="50" value="0" step="1" oninput="onSetupChange()">
+            <span class="slider-val" id="saFineDisplay">+0 cents</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wave-section">
+      <canvas id="mainCanvas"></canvas>
+      <div class="wave-label" id="waveLabel">Start the drone to see the interference pattern</div>
+    </section>
+
+    <section class="drone-controls">
+      <button class="drone-btn" id="droneBtn" onclick="toggleDrone()">
+        <span class="drone-icon" id="droneIcon">▶</span>
+        <span id="droneBtnText">Start Drone</span>
+      </button>
+      <div class="ref-actions">
+        <button class="ghost-btn" onclick="allRefOn()">All ref on</button>
+        <button class="ghost-btn" onclick="allRefOff()">All ref off</button>
+      </div>
+    </section>
+
+    <section class="strings-section">
+      <div class="strings-header">
+        <div class="strings-title">Reference Drone</div>
+        <div class="strings-subtitle">Toggle individual strings to isolate</div>
+      </div>
+      <div class="string-grid" id="refGrid"></div>
+    </section>
+
+    <div class="section-divider">
+      <div class="divider-line"></div>
+      <div class="divider-text">your tuning</div>
+      <div class="divider-line"></div>
     </div>
-  </div>
-  <div id="info">
-    <h1>Welcome to the Ear-Training Website</h1>
-    <p>Improve your ability to recognize musical intervals and chords with our interactive ear-training exercises.</p>
-  </div>
-  <button id="toggle-button">Toggle Frequency Display</button>
-  <div id="difficulty">
-    <button id="easy">Easy</button>
-    <button id="medium">Medium</button>
-    <button id="hard">Hard</button>
-  </div>
+
+    <section class="strings-section">
+      <div class="strings-header">
+        <div class="strings-title">Your Strings</div>
+        <div class="prac-actions">
+          <button class="ghost-btn" onclick="allPracOn()">All on</button>
+          <button class="ghost-btn" onclick="allPracOff()">All off</button>
+          <button class="ghost-btn accent" onclick="rerandomize()">↻ Rerandomize</button>
+        </div>
+      </div>
+      <div class="string-grid" id="pracGrid"></div>
+    </section>
+
+    <section class="instructions-panel">
+      <div class="inst-title">How to practice</div>
+      <div class="inst-steps">
+        <div class="inst-step">
+          <span class="inst-num">1</span>
+          <span>Start the drone and listen to the full tanpura sound.</span>
+        </div>
+        <div class="inst-step">
+          <span class="inst-num">2</span>
+          <span>Mute reference strings to isolate the one you want to match.</span>
+        </div>
+        <div class="inst-step">
+          <span class="inst-num">3</span>
+          <span>Turn on your string and adjust the slider until the beating slows and disappears.</span>
+        </div>
+        <div class="inst-step">
+          <span class="inst-num">4</span>
+          <span>Unmute the reference and compare. Matching Sa three times in a row reveals everything.</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
   <script src="main.js"></script>
 </body>
 </html>
