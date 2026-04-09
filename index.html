@@ -23,9 +23,9 @@
         </div>
       </div>
       <div class="diff-bar">
-        <button class="diff-btn active" data-diff="beginner" onclick="setDiff('beginner')">Beginner</button>
-        <button class="diff-btn" data-diff="intermediate" onclick="setDiff('intermediate')">Intermediate</button>
-        <button class="diff-btn" data-diff="advanced" onclick="setDiff('advanced')">Advanced</button>
+        <button class="diff-btn active" data-diff="beginner">Beginner</button>
+        <button class="diff-btn" data-diff="intermediate">Intermediate</button>
+        <button class="diff-btn" data-diff="advanced">Advanced</button>
       </div>
     </div>
   </header>
@@ -37,7 +37,7 @@
       <div class="setup-grid">
         <div class="setup-field">
           <label>Tuning</label>
-          <select id="tuningSelect" onchange="onSetupChange()">
+          <select id="tuningSelect">
             <option value="Pa">Pa – Sa – Sa – Sa (low)</option>
             <option value="Ma">Ma# – Sa – Sa – Sa (low)</option>
             <option value="Ni">Ni – Sa – Sa – Sa (low)</option>
@@ -46,14 +46,14 @@
         <div class="setup-field">
           <label>Base Sa</label>
           <div class="slider-row">
-            <input type="range" id="saCoarse" min="196" max="493" value="261" step="1" oninput="onSetupChange()">
+            <input type="range" id="saCoarse" min="196" max="493" value="261" step="1">
             <span class="slider-val" id="saDisplay">C4 · 261 Hz</span>
           </div>
         </div>
         <div class="setup-field">
           <label>Fine tune</label>
           <div class="slider-row">
-            <input type="range" id="saFine" min="-50" max="50" value="0" step="1" oninput="onSetupChange()">
+            <input type="range" id="saFine" min="-50" max="50" value="0" step="1">
             <span class="slider-val" id="saFineDisplay">+0 cents</span>
           </div>
         </div>
@@ -66,13 +66,13 @@
     </section>
 
     <section class="drone-controls">
-      <button class="drone-btn" id="droneBtn" onclick="toggleDrone()">
-        <span class="drone-icon" id="droneIcon">▶</span>
-        <span id="droneBtnText">Start Drone</span>
+      <button class="drone-btn" id="droneBtn">
+        <span class="drone-icon">▶</span>
+        <span class="drone-text">Start Drone</span>
       </button>
       <div class="ref-actions">
-        <button class="ghost-btn" onclick="allRefOn()">All ref on</button>
-        <button class="ghost-btn" onclick="allRefOff()">All ref off</button>
+        <button class="ghost-btn" id="allRefOn">All ref on</button>
+        <button class="ghost-btn" id="allRefOff">All ref off</button>
       </div>
     </section>
 
@@ -94,9 +94,9 @@
       <div class="strings-header">
         <div class="strings-title">Your Strings</div>
         <div class="prac-actions">
-          <button class="ghost-btn" onclick="allPracOn()">All on</button>
-          <button class="ghost-btn" onclick="allPracOff()">All off</button>
-          <button class="ghost-btn accent" onclick="rerandomize()">↻ Rerandomize</button>
+          <button class="ghost-btn" id="allPracOn">All on</button>
+          <button class="ghost-btn" id="allPracOff">All off</button>
+          <button class="ghost-btn accent" id="rerandomBtn">↻ Rerandomize</button>
         </div>
       </div>
       <div class="string-grid" id="pracGrid"></div>
