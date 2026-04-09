@@ -1,4 +1,4 @@
-/* ── Variables Writing to Redeploy ─────────────────────────────────────────────────────────────── */
+/* ── Variables ─────────────────────────────────────────────────────────────── */
 :root {
   --bg:         #0d0d0b;
   --bg-panel:   #131310;
@@ -523,4 +523,85 @@ input[type=range]::-moz-range-thumb {
   .slider-row { width: 100%; }
   .drone-controls { flex-wrap: wrap; }
   .ref-actions { margin-left: 0; }
+}
+
+/* ── Shruti lives ──────────────────────────────────────────────────────── */
+.lives-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.lives-label {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  color: var(--text-sec);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+#shrutiLives {
+  display: flex;
+  gap: 8px;
+}
+
+.shruti-dot {
+  font-size: 1.1rem;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.shruti-dot.alive {
+  color: var(--gold);
+  text-shadow: 0 0 8px rgba(201,168,76,0.5);
+}
+
+.shruti-dot.lost {
+  color: var(--text-ter);
+  text-shadow: none;
+}
+
+.lives-hint {
+  font-size: 0.62rem;
+  color: var(--text-ter);
+  letter-spacing: 0.08em;
+  margin-left: auto;
+}
+
+/* ── Check button ──────────────────────────────────────────────────────── */
+.check-btn {
+  width: 100%;
+  padding: 5px 0;
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: rgba(201,168,76,0.5);
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.check-btn:not(:disabled):hover {
+  background: var(--gold-dim);
+  border-color: rgba(201,168,76,0.4);
+  color: var(--gold);
+}
+
+.check-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ── Wrong badge ───────────────────────────────────────────────────────── */
+.prac-badge.wrong {
+  opacity: 1;
+  background: rgba(184,92,74,0.12);
+  color: var(--red);
+  border: 1px solid rgba(184,92,74,0.25);
 }
