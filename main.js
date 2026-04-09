@@ -1,4 +1,4 @@
-/* ── Audio context ───────────────────────────────────────────────────────── */
+/* ── Audio context Writing to Redeploy ───────────────────────────────────────────────────────── */
 const AC = new (window.AudioContext || window.webkitAudioContext)();
 const analyser = AC.createAnalyser();
 analyser.fftSize = 2048;
